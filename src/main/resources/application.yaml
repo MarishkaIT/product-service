@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: pass
+    url: jdbc:postgresql://localhost:5432/db_product
