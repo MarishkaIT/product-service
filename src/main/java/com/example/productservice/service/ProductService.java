@@ -2,7 +2,9 @@ package com.example.productservice.service;
 
 import com.example.productservice.exception.ResourceNotFoundException;
 import com.example.productservice.model.Product;
+import com.example.productservice.model.ProductImage;
 import com.example.productservice.model.Review;
+import com.example.productservice.repository.ProductImageRepository;
 import com.example.productservice.repository.ProductRepository;
 import com.example.productservice.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,32 @@ public class ProductService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
+    private ProductImageRepository imageRepository;
 
     public List<Review> getReviewForProduct(Long productId) {
         return reviewRepository.findByProductId(productId);
+    }
+
+    public List<ProductImage> getImagesForProduct(Long productId) {
+        return imageRepository.findByProductId(productId);
+    }
+
+    public ProductImage addImage(Long productId, ProductImage image){
+        Product product = productRepository.findById(productId).orElseThrow(()-> new ResourceNotFoundException("Product not found!"));
+        image.setProduct(product);
+        return imageRepository.save(image);
+    }
+
+    public ProductImage updateImage(Long imageId, ProductImage image) {
+        ProductImage existImage = imageRepository.findById(imageId).orElseThrow(()-> new ResourceNotFoundException("Image not found!"));
+        existImage.setImageUrl(image.getImageUrl());
+        existImage.setImageType(image.getImageType());
+        return imageRepository.save(existImage);
+    }
+
+    public void deleteImage(Long imageId) {
+        imageRepository.deleteById(imageId);
     }
 
     public Review addReviews(Long productId, Review review) {
