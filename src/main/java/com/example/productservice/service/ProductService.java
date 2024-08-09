@@ -2,7 +2,10 @@ package com.example.productservice.service;
 
 import com.example.productservice.exception.ResourceNotFoundException;
 import com.example.productservice.model.Product;
+import com.example.productservice.model.Review;
 import com.example.productservice.repository.ProductRepository;
+import com.example.productservice.repository.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +13,36 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    public List<Review> getReviewForProduct(Long productId) {
+        return reviewRepository.findByProductId(productId);
+    }
+
+    public Review addReviews(Long productId, Review review) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
+        review.setProduct(product);
+        return reviewRepository.save(review);
+    }
+
+    public Review updateReview(Long reviewId, Review review) {
+        Review existingReview = reviewRepository.findById(reviewId).orElseThrow(() -> new ResourceNotFoundException("Review not found!"));
+        existingReview.setReviewText(review.getReviewText());
+        existingReview.setRating(review.getRating());
+        return reviewRepository.save(existingReview);
+    }
+
+    public void deleteReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
+
+    public List<Product> searchProducts(String query) {
+        return productRepository.searchProducts(query);
+    }
 
     public List<Product> getAllProducts(){
         return productRepository.findAll();

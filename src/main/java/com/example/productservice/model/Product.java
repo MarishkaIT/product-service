@@ -2,11 +2,9 @@ package com.example.productservice.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+
 
 @Entity
 @Data
@@ -24,4 +22,7 @@ public class Product {
     private String brand;
     private String model;
     private Integer stockQuantity;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
 }
