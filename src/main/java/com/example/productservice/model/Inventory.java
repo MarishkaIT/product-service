@@ -15,6 +15,8 @@ public class Inventory {
 
     @ManyToOne
     private Product product;
+
     private Integer quantity;
+
     private Boolean isAvailable;
 }
