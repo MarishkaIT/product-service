@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "review")
 public class Review {
 
     @Id
@@ -16,9 +17,11 @@ public class Review {
 
     private String reviewText;
     private Integer rating;
+    @Column(name = "create_at")
     private LocalDate createAt;
 
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
 }

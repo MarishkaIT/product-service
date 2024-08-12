@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "product_image")
 public class ProductImage {
 
     @Id
@@ -15,7 +16,9 @@ public class ProductImage {
 
     private String imageUrl;
     private String imageType;
+    @Column(name = "create_at")
     private LocalDate createAt;
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 }
