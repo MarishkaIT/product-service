@@ -64,4 +64,8 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
+    @GetMapping("/products/{id}/inventory")
+    public Boolean isProductAvailable(@PathVariable Long id) {
+        return productService.isProductAvailable(id);
+    }
 }
