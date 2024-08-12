@@ -14,7 +14,9 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "image_type")
     private String imageType;
     @Column(name = "create_at")
     private LocalDate createAt;

@@ -1,8 +1,6 @@
 package com.example.productservice.controller;
 
 import com.example.productservice.model.Product;
-import com.example.productservice.model.ProductImage;
-import com.example.productservice.model.Review;
 import com.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,6 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-
 
     @GetMapping
     public List<Product> getAllProducts() {

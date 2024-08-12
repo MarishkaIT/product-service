@@ -1,7 +1,6 @@
 package com.example.productservice.controller;
 
 import com.example.productservice.model.Review;
-import com.example.productservice.service.ProductService;
 import com.example.productservice.service.ReviewService;
 import org.springframework.web.bind.annotation.*;
 

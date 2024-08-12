@@ -22,6 +22,7 @@ public class Product {
     private String category;
     private String brand;
     private String model;
+    @Column(name = "stock_quantity")
     private Integer stockQuantity;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
