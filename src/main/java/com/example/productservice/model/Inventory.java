@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "inventory")
 public class Inventory {
 
     @Id
@@ -14,9 +15,11 @@ public class Inventory {
 
 
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer quantity;
 
+    @Column(name = "is_available")
     private Boolean isAvailable;
 }
